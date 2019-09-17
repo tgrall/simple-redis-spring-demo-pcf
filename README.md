@@ -10,13 +10,13 @@ the service binding from PCF to connect to Redis.
 
 Log in to the Cloud Foundry environment:
 
-```
+```bash
 $ cf login -a <url>
 ```
 
 If you are not already in the proper organization you can create or select it using the following commands:
 
-```
+```bash
 $ cf create-org redis-demos
 
 $ cf create-space redis-upgrade -o redis-demos
@@ -29,7 +29,7 @@ You are now ready to create a new app, and bind it to a new Redis database.
 
 Find the Redis plan that you want to use for your application:
 
-```
+```bash
 $ cf marketplace 
 
 OK
@@ -44,7 +44,7 @@ redislabs        small-redis, medium-redis, large-redis   Enterprise-Grade Redis
 In my environment I am using the [Redis Enterprise for PCF](https://docs.pivotal.io/partners/redis-labs-enterprise-pack/index.html) package.
 You can look at the various plans using: (in my case they are the default one)
 
-```
+```bash
 $ cf marketplace -s redislabs
 
   Getting service plan information for service redislabs as admin...
@@ -59,7 +59,7 @@ $ cf marketplace -s redislabs
 
 Create a new Redis Service that will be use later by the application:
 
-```
+```bash
 $ cf create-service redislabs  medium-redis my-medium-redis-instance
 
 Creating service instance my-medium-redis-instance in org redis-demos / space redis-upgrade as admin...
@@ -68,7 +68,7 @@ OK
 
 Build the project for Cloud Foundry
 
-```
+```bash
 $  mvn clean package spring-boot:repackage
 ```
 
@@ -81,12 +81,12 @@ This will be done in 3 steps:
 1. Bin the newly created RedisLabs service to the application
 1. Start the application
 
-```
+```bash
 $ cf push --no-start
 ```
 
 
-```
+```bash
 $ cf bind-service simple-pcf-spring-redis-app my-medium-redis-instance
 
 ```
@@ -95,15 +95,14 @@ You can look at the services and applications using the commands `cf services` a
 
 Let's now start the application
 
-```
+```bash
 $ cf start simple-pcf-spring-redis-app
 ```
 
 You can find the URL to test the application using:
 
-```
+```bash
 $ cf apps
-
 ```
 
-You should see the application running from PCF.
+Copy the URL and open your browser to go to the application running on PCF.
