@@ -1,0 +1,6 @@
+---
+applications:
+  - name: simple-pcf-spring-redis-app
+    memory: 1G
+    random-route: true
+    path: target/simple-redis-spring-demo-pcf-cloud.jar

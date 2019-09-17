@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Springboot 101</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+
+
+Very basic page that call Redis REST API:
+
+<div id="customer-info" />
+
+
+<script type="text/javascript">
+
+
+setInterval(function()
+{
+    var custId = Math.floor(Math.random() * 100);
+
+    $.ajax({
+        type: "get",
+        url: "/customers/"+ custId ,
+        success:function(data)
+        {
+            $("#customer-info").html(data.name +" "+ data.updateTime)
+
+            //console.log the response
+            console.log(data);
+        }
+    });
+}, 1000); //10000 milliseconds = 10 seconds
+
+
+</script>
+
+</body>
+</html>
